@@ -48,26 +48,23 @@ def mongo_atlas_insert(data, table_name):
         db = client['binancedb']
         collection = db[table_name]
         for offer in data:
-            if collection.find_one({"advNo":offer.get('adv',{}).get('advNo')}) is None:
-                adv = {
-                    "advNo": offer.get('adv',{}).get('advNo'),
-                    "date": datetime.now(),
-                    "classify": offer.get('adv',{}).get('classify'),
-                    "tradeType": offer.get('adv',{}).get('tradeType'),
-                    "fiatUnit": offer.get('adv',{}).get('fiatUnit'),
-                    "price": offer.get('adv',{}).get('price'),
-                    "surplusAmount": offer.get('adv',{}).get('surplusAmount'),
-                    "tradableQuantity": offer.get('adv',{}).get('tradableQuantity'),
-                    "maxSingleTransAmount": offer.get('adv',{}).get('maxSingleTransAmount'),
-                    "minSingleTransAmount": offer.get('adv',{}).get('minSingleTransAmount'),
-                    "tradeMethods": offer.get('adv',{}).get('tradeMethods'),
-                    "isSafePayment": offer.get('adv',{}).get('isSafePayment'),
-                    "advertiser": offer.get('advertiser'),
-                }
-                collection.insert_one(adv)
-                adv.clear()
-            else:
-                print(f"El documento con el advNo {offer.get('adv',{}).get('advNo')} ya existe.")
+            adv = {
+                "advNo": offer.get('adv',{}).get('advNo'),
+                "date": datetime.now(),
+                "classify": offer.get('adv',{}).get('classify'),
+                "tradeType": offer.get('adv',{}).get('tradeType'),
+                "fiatUnit": offer.get('adv',{}).get('fiatUnit'),
+                "price": offer.get('adv',{}).get('price'),
+                "surplusAmount": offer.get('adv',{}).get('surplusAmount'),
+                "tradableQuantity": offer.get('adv',{}).get('tradableQuantity'),
+                "maxSingleTransAmount": offer.get('adv',{}).get('maxSingleTransAmount'),
+                "minSingleTransAmount": offer.get('adv',{}).get('minSingleTransAmount'),
+                "tradeMethods": offer.get('adv',{}).get('tradeMethods'),
+                "isSafePayment": offer.get('adv',{}).get('isSafePayment'),
+                "advertiser": offer.get('advertiser'),
+            }
+            collection.insert_one(adv)
+            adv.clear()
         client.close()
     except Exception as e:
         print(e)
