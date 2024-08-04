@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: '3.12.4'
 
+      - name: Ruta
+        run: pwd
+
       - name: Run script
         run: python binanceApi.py
 
