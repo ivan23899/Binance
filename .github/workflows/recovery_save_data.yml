@@ -1,0 +1,29 @@
+name: recovery
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Chechout repo
+        uses: actions/checkot@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.4'
+
+      - name: Run script
+        run: python ./binanceApi.py
+
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: Update binanceApi
