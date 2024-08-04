@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Chechout repo
-        uses: actions/checkot@v4
+        uses: actions/checkout@v4
         
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -25,5 +25,5 @@ jobs:
 
       - name: Auto commit
         uses: stefanzweifel/git-auto-commit-action@v5
-          with:
-            commit_message: Update binanceApi
+        with:
+          commit_message: Update binanceApi
