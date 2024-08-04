@@ -37,8 +37,6 @@ jobs:
       - name: Connect to MongoDB and Run Script
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
-
-      - name: Run script
         run: python binanceApi.py
 
       - name: Auto commit
