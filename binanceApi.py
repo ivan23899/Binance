@@ -6,6 +6,7 @@ import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import logging
+import os
 
 def get_p2p_prices(asset='USDT', fiat='BOB', trade_type='BUY', rows=10, page=1):
     url = 'https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search'
@@ -43,8 +44,8 @@ def save_to_json(data, filename='p2p_prices.json'):
         print(f"Error al escribir en el archivo JSON: {e}")
 
 def mongo_atlas_insert(data, table_name):
-    uri = "mongodb+srv://clarosfernandezruddyivan:dYihYZ4mB59IAvJD@cluster0.pa9jm6b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-    client = MongoClient(uri, server_api=ServerApi('1'), tls=True, tlsAllowInvalidCertificates=True)
+    mongo_uri = os.environ.get('MONGO_URI')
+    client = MongoClient(mongo_uri, server_api=ServerApi('1'), tls=True, tlsAllowInvalidCertificates=True)
     try:
         db = client['binancedb']
         collection = db[table_name]
