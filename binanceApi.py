@@ -2,7 +2,6 @@ import requests
 import json
 import time
 from datetime import datetime
-import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import logging
